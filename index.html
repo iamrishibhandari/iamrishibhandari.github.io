@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rishi Bhandari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800;900&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F6F7F9;
+  --ink:#121E36;
+  --ink-soft:#4A5670;
+  --line:#D9DEE8;
+  --marigold:#F0A431;
+  --up:#15805A;
+  --card:#FFFFFF;
+  --mono:'IBM Plex Mono',monospace;
+  --sans:'Archivo',sans-serif;
+  --serif:'Instrument Serif',serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{background:var(--marigold);color:var(--ink)}
+a{color:inherit}
+
+/* ---------- scroll progress bar ---------- */
+#progress{
+  position:fixed;top:0;left:0;height:3px;width:0%;
+  background:linear-gradient(90deg,var(--up),var(--marigold));
+  z-index:100;transition:width .08s linear;
+}
+
+/* ---------- nav ---------- */
+nav{
+  position:sticky;top:0;z-index:50;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 5vw;
+  background:rgba(246,247,249,.85);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.nav-name{font-family:var(--mono);font-size:14px;font-weight:500;letter-spacing:.06em;text-decoration:none}
+.nav-name span{color:var(--up);display:inline-block;animation:tickup 3s ease-in-out infinite}
+@keyframes tickup{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+.nav-links{display:flex;gap:28px}
+.nav-links a{
+  font-family:var(--mono);font-size:13px;letter-spacing:.04em;
+  text-decoration:none;color:var(--ink-soft);
+  position:relative;transition:color .2s;
+}
+.nav-links a::after{
+  content:'';position:absolute;left:0;bottom:-4px;height:1.5px;width:0;
+  background:var(--marigold);transition:width .25s ease;
+}
+.nav-links a:hover::after,.nav-links a:focus-visible::after{width:100%}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--ink)}
+.nav-links a:focus-visible{outline:2px solid var(--marigold);outline-offset:4px}
+
+/* ---------- ticker ---------- */
+.ticker-wrap{
+  overflow:hidden;border-bottom:1px solid var(--line);
+  background:var(--ink);color:var(--paper);
+  padding:9px 0;white-space:nowrap;
+}
+.ticker{display:inline-block;animation:scroll 38s linear infinite}
+.ticker-wrap:hover .ticker{animation-play-state:paused}
+.ticker span{
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.05em;
+  margin-right:48px;
+}
+.ticker .up{color:#5BD6A4}
+.ticker .gold{color:var(--marigold)}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- hero ---------- */
+.hero{padding:11vh 5vw 9vh;max-width:1100px;margin:0 auto}
+.eyebrow{
+  font-family:var(--mono);font-size:13px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--up);margin-bottom:22px;
+}
+h1{
+  font-weight:900;font-size:clamp(44px,8vw,92px);
+  line-height:.98;letter-spacing:-.025em;
+  max-width:14ch;
+}
+h1 .line{display:block;overflow:hidden}
+h1 .line span{display:inline-block;transform:translateY(110%);animation:riseup .9s cubic-bezier(.2,.7,.2,1) forwards}
+h1 .line:nth-child(2) span{animation-delay:.12s}
+@keyframes riseup{to{transform:translateY(0)}}
+h1 em{
+  font-family:var(--serif);font-style:italic;font-weight:400;
+  letter-spacing:0;color:var(--ink-soft);
+}
+.hero .eyebrow,.hero p,.hero-cta{opacity:0;animation:fadein .8s ease forwards}
+.hero .eyebrow{animation-delay:.05s}
+.hero p{animation-delay:.35s}
+.hero-cta{animation-delay:.5s}
+@keyframes fadein{to{opacity:1}}
+.hero p{
+  margin-top:30px;max-width:54ch;font-size:19px;color:var(--ink-soft);
+}
+.hero-cta{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{
+  font-family:var(--mono);font-size:14px;text-decoration:none;
+  padding:13px 22px;border:1.5px solid var(--ink);
+  transition:transform .15s, box-shadow .15s, background .15s;
+  display:inline-block;
+}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+.btn:focus-visible{outline:2px solid var(--marigold);outline-offset:3px}
+.btn.solid{background:var(--ink);color:var(--paper)}
+.btn.solid:hover{box-shadow:4px 4px 0 var(--marigold)}
+
+/* ---------- sections ---------- */
+section{padding:8vh 5vw;max-width:1100px;margin:0 auto}
+.sec-head{
+  display:flex;align-items:baseline;gap:18px;
+  position:relative;
+  padding-bottom:14px;margin-bottom:42px;
+}
+.sec-head::after{
+  content:'';position:absolute;left:0;bottom:0;height:1.5px;width:0;
+  background:var(--ink);transition:width 1s cubic-bezier(.2,.7,.2,1) .15s;
+}
+.sec-head.in::after{width:100%}
+.sec-head .sym{
+  font-family:var(--mono);font-size:13px;letter-spacing:.1em;
+  background:var(--ink);color:var(--paper);padding:3px 9px;
+}
+.sec-head h2{font-size:clamp(26px,3.6vw,38px);font-weight:800;letter-spacing:-.02em}
+.sec-head .note{margin-left:auto;font-family:var(--mono);font-size:12.5px;color:var(--ink-soft)}
+
+/* ---------- log / updates ---------- */
+.log-item{
+  display:grid;grid-template-columns:130px 1fr;gap:24px;
+  padding:20px 0;border-bottom:1px solid var(--line);
+  transition:padding-left .25s ease;
+}
+.log-item:hover{padding-left:10px;background:linear-gradient(90deg,transparent,rgba(240,164,49,.06),transparent)}
+.log-date{font-family:var(--mono);font-size:13px;color:var(--ink-soft);padding-top:3px}
+.log-item h3{font-size:17px;font-weight:600;margin-bottom:4px}
+.log-item p{font-size:15.5px;color:var(--ink-soft);max-width:62ch}
+.log-tag{
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;
+  color:var(--up);text-transform:uppercase;
+}
+
+/* ---------- projects ---------- */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:22px}
+.proj{
+  background:var(--card);border:1.5px solid var(--line);
+  padding:26px;display:flex;flex-direction:column;gap:14px;
+  transition:transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s, border-color .25s;
+}
+.proj:hover{transform:translateY(-6px) rotate(-.4deg);border-color:var(--ink);box-shadow:8px 8px 0 var(--ink)}
+.proj-top{display:flex;justify-content:space-between;align-items:center}
+.proj-top .sym{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--ink-soft)}
+.status{font-family:var(--mono);font-size:11px;padding:3px 9px;letter-spacing:.05em}
+.status.live{background:rgba(21,128,90,.12);color:var(--up)}
+.status.live::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--up);margin-right:6px;animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
+.status.building{background:rgba(240,164,49,.16);color:#9A6A12}
+.status.queued{background:var(--paper);color:var(--ink-soft);border:1px solid var(--line)}
+.proj h3{font-size:21px;font-weight:800;letter-spacing:-.01em}
+.proj p{font-size:15px;color:var(--ink-soft);flex:1}
+.proj-links{display:flex;gap:18px}
+.proj-links a{
+  font-family:var(--mono);font-size:13px;color:var(--ink);
+  text-decoration:none;border-bottom:1.5px solid var(--marigold);
+  padding-bottom:2px;transition:border-color .2s;
+}
+.proj-links a:hover{border-color:var(--ink)}
+.tech{display:flex;gap:8px;flex-wrap:wrap}
+.tech span{font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);background:var(--paper);padding:3px 8px;border:1px solid var(--line);transition:border-color .2s,color .2s}
+.proj:hover .tech span{border-color:var(--marigold)}
+
+/* ---------- writing ---------- */
+.post{
+  display:grid;grid-template-columns:1fr auto;gap:20px;align-items:baseline;
+  padding:26px 0;border-bottom:1px solid var(--line);
+  text-decoration:none;transition:padding-left .25s ease;
+  position:relative;
+}
+.post::before{
+  content:'→';position:absolute;left:-26px;opacity:0;
+  font-family:var(--mono);color:var(--marigold);
+  transition:opacity .25s,left .25s;
+}
+.post:hover::before{opacity:1;left:-18px}
+.post:hover{padding-left:14px}
+.post:hover h3{color:var(--up)}
+.post h3{
+  font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:clamp(22px,3vw,30px);transition:color .2s;
+}
+.post p{font-size:15px;color:var(--ink-soft);margin-top:6px;max-width:60ch}
+.post .meta{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);white-space:nowrap}
+.writing-note{
+  margin-top:30px;font-family:var(--mono);font-size:13px;color:var(--ink-soft);
+}
+
+/* ---------- about ---------- */
+.about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:60px}
+.about-grid>div:first-child p{margin-bottom:18px;color:var(--ink-soft);font-size:16.5px}
+.about-grid strong{color:var(--ink);font-weight:600}
+.fact{
+  display:flex;justify-content:space-between;gap:16px;
+  padding:13px 0;border-bottom:1px solid var(--line);
+  font-size:15px;
+}
+.fact .k{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);letter-spacing:.04em}
+.fact .v{text-align:right;font-weight:500}
+
+/* ---------- footer / contact ---------- */
+footer{
+  background:var(--ink);color:var(--paper);
+  padding:9vh 5vw 6vh;margin-top:6vh;
+}
+.foot-inner{max-width:1100px;margin:0 auto}
+footer h2{font-size:clamp(34px,6vw,64px);font-weight:900;letter-spacing:-.02em;line-height:1.05}
+footer h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--marigold)}
+.foot-links{display:flex;gap:26px;margin-top:36px;flex-wrap:wrap}
+.foot-links a{
+  font-family:var(--mono);font-size:14px;color:var(--paper);
+  text-decoration:none;border-bottom:1.5px solid rgba(255,255,255,.3);
+  padding-bottom:3px;transition:border-color .2s,color .2s;
+}
+.foot-links a:hover{border-color:var(--marigold);color:var(--marigold)}
+.foot-base{
+  margin-top:70px;padding-top:24px;border-top:1px solid rgba(255,255,255,.15);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+  font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.5);
+}
+
+/* ---------- back to top ---------- */
+#toTop{
+  position:fixed;right:22px;bottom:22px;z-index:60;
+  width:44px;height:44px;border:1.5px solid var(--ink);
+  background:var(--paper);color:var(--ink);cursor:pointer;
+  font-family:var(--mono);font-size:16px;
+  opacity:0;pointer-events:none;transform:translateY(10px);
+  transition:opacity .3s,transform .3s,box-shadow .15s;
+}
+#toTop.show{opacity:1;pointer-events:auto;transform:none}
+#toTop:hover{box-shadow:3px 3px 0 var(--marigold)}
+
+/* ---------- reveal animations ---------- */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal-l{opacity:0;transform:translateX(-32px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal-l.in{opacity:1;transform:none}
+.reveal-s{opacity:0;transform:translateY(24px) scale(.97);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+.reveal-s.in{opacity:1;transform:none}
+
+@media (max-width:760px){
+  .nav-links{gap:16px}
+  .nav-links a:nth-child(n+4){display:none}
+  .log-item{grid-template-columns:1fr;gap:6px}
+  .about-grid{grid-template-columns:1fr;gap:36px}
+  .post{grid-template-columns:1fr}
+  .sec-head .note{display:none}
+  .post::before{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .ticker,.nav-name span,.status.live::before{animation:none}
+  h1 .line span{animation:none;transform:none}
+  .hero .eyebrow,.hero p,.hero-cta{animation:none;opacity:1}
+  .reveal,.reveal-l,.reveal-s{opacity:1;transform:none;transition:none}
+  .sec-head::after{width:100%;transition:none}
+  .btn:hover,.proj:hover{transform:none}
+  #progress{display:none}
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav>
+  <a class="nav-name" href="#top">RISHI<span>▲</span>BHANDARI</a>
+  <div class="nav-links">
+    <a href="#log">Now</a>
+    <a href="#projects">Projects</a>
+    <a href="#writing">Writing</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker" id="ticker">
+    <span>RISHI <span class="up">▲ LONG</span></span>
+    <span>SCHOOL: NORTHEASTERN · D'AMORE-McKIM</span>
+    <span>MAJOR: ECON + BUSINESS ADMIN <span class="gold">/ FINANCE · DS MINOR</span></span>
+    <span>PROJECTS SHIPPED: 1 <span class="up">▲</span></span>
+    <span>ROADMAP: 5 PROJECTS</span>
+    <span>STATUS: <span class="gold">BUILDING</span></span>
+    <span>CO-OP TARGET: FALL 2027</span>
+    <span>SLEEP: <span class="gold">TRADING AT A DISCOUNT</span></span>
+    <span>DEADLINES: PRICED IN</span>
+    <span>OUTLOOK: <span class="up">CAUTIOUSLY OPTIMISTIC ▲</span></span>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <p class="eyebrow">Northeastern University · Boston, MA</p>
+  <h1>
+    <span class="line"><span>Hi, I'm Rishi.</span></span>
+    <span class="line"><span>This is my <em>corner of the internet.</em></span></span>
+  </h1>
+  <p>Economics and Finance student at Northeastern with a Data Science minor. This site is where my résumé, projects, and occasional writing live. Where it's all headed, I'm still working out.</p>
+  <div class="hero-cta">
+    <a class="btn solid" href="resume.pdf" target="_blank">View résumé →</a>
+    <a class="btn" href="#projects">See projects</a>
+  </div>
+</header>
+
+<section id="log">
+  <div class="sec-head reveal">
+    <span class="sym">LOG</span>
+    <h2>Recent updates</h2>
+    <span class="note">reverse chronological</span>
+  </div>
+  <div class="log-item reveal-l">
+    <div class="log-date">Jun 2026</div>
+    <div>
+      <span class="log-tag">Shipped</span>
+      <h3>DCF Valuation Dashboard is live</h3>
+      <p>Built and deployed an interactive DCF tool with Python and Streamlit. Pull a ticker, adjust assumptions, get a valuation. First project in a longer finance-AI roadmap.</p>
+    </div>
+  </div>
+  <div class="log-item reveal-l">
+    <div class="log-date">May 2026</div>
+    <div>
+      <span class="log-tag">Pitch</span>
+      <h3>Startup pitch night, 2nd place</h3>
+      <p>Pitched OmniRetail at a campus venture pitch night with a full deck, memo, and speaker notes. Lost by one vote. Still mad about it.</p>
+    </div>
+  </div>
+  <div class="log-item reveal-l">
+    <div class="log-date">Apr 2026</div>
+    <div>
+      <span class="log-tag">Academics</span>
+      <h3>Declared Data Science minor</h3>
+      <p>Through Khoury College, placed into CS 2000. The logic: data science maps directly onto where finance is going (Python, stats, ML) without needing a CS background first.</p>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="sec-head reveal">
+    <span class="sym">PRJ</span>
+    <h2>Projects</h2>
+    <span class="note">finance-AI portfolio · github.com/iamrishibhandari</span>
+  </div>
+  <div class="proj-grid">
+    <div class="proj reveal-s">
+      <div class="proj-top"><span class="sym">01 / DCF</span><span class="status live">LIVE</span></div>
+      <h3>DCF Valuation Dashboard</h3>
+      <p>Interactive discounted cash flow valuation for any public company. Adjustable growth, margin, and WACC assumptions with live data via yfinance.</p>
+      <div class="tech"><span>Python</span><span>Streamlit</span><span>pandas</span><span>yfinance</span></div>
+      <div class="proj-links">
+        <a href="https://github.com/iamrishibhandari/dcf-dashboard" target="_blank">GitHub ↗</a>
+        <a href="#" target="_blank">Live app ↗</a>
+      </div>
+    </div>
+    <div class="proj reveal-s">
+      <div class="proj-top"><span class="sym">02 / NLP</span><span class="status building">● BUILDING</span></div>
+      <h3>Earnings Call Analyzer</h3>
+      <p>Pulls earnings call transcripts and uses AI to extract tone, guidance changes, and what management is avoiding saying.</p>
+      <div class="tech"><span>Python</span><span>LLM API</span><span>NLP</span></div>
+      <div class="proj-links"><a href="https://github.com/iamrishibhandari" target="_blank">GitHub ↗</a></div>
+    </div>
+    <div class="proj reveal-s">
+      <div class="proj-top"><span class="sym">03 / SCR</span><span class="status queued">QUEUED</span></div>
+      <h3>Stock Screener</h3>
+      <p>Custom multi-factor screener: value, quality, and momentum filters across global equities.</p>
+      <div class="tech"><span>Python</span><span>pandas</span></div>
+      <div class="proj-links"><a href="https://github.com/iamrishibhandari" target="_blank">GitHub ↗</a></div>
+    </div>
+    <div class="proj reveal-s">
+      <div class="proj-top"><span class="sym">04 / OPT</span><span class="status queued">QUEUED</span></div>
+      <h3>Portfolio Optimizer</h3>
+      <p>Mean-variance and risk-parity portfolio construction with constraint handling and backtesting.</p>
+      <div class="tech"><span>Python</span><span>NumPy</span></div>
+      <div class="proj-links"><a href="https://github.com/iamrishibhandari" target="_blank">GitHub ↗</a></div>
+    </div>
+    <div class="proj reveal-s">
+      <div class="proj-top"><span class="sym">05 / AGT</span><span class="status queued">QUEUED</span></div>
+      <h3>AI Research Agent</h3>
+      <p>An agent that compiles a first-pass research note on any company (filings, news, comps) in minutes.</p>
+      <div class="tech"><span>Python</span><span>Agents</span></div>
+      <div class="proj-links"><a href="https://github.com/iamrishibhandari" target="_blank">GitHub ↗</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="writing">
+  <div class="sec-head reveal">
+    <span class="sym">IDX</span>
+    <h2>Writing</h2>
+    <span class="note">opinions, not advice</span>
+  </div>
+  <a class="post reveal" href="#">
+    <div>
+      <h3>Finance is becoming a programming job</h3>
+      <p>Slowly, then all at once. Why I'm betting my degree on the overlap between the two.</p>
+    </div>
+    <span class="meta">Coming soon · Finance × Code</span>
+  </a>
+  <a class="post reveal" href="#">
+    <div>
+      <h3>What building a DCF tool taught me that class didn't</h3>
+      <p>You don't understand a model until you've had to handle its edge cases in code.</p>
+    </div>
+    <span class="meta">Coming soon · Projects</span>
+  </a>
+  <a class="post reveal" href="#">
+    <div>
+      <h3>The co-op advantage nobody talks about</h3>
+      <p>Why I stopped thinking about transferring and started thinking about compounding.</p>
+    </div>
+    <span class="meta">Coming soon · Career</span>
+  </a>
+  <p class="writing-note">// To publish a post: duplicate one of the blocks above, swap in your title and link to the full piece (Notion, Substack, or another HTML page).</p>
+</section>
+
+<section id="about">
+  <div class="sec-head reveal">
+    <span class="sym">ABT</span>
+    <h2>About</h2>
+  </div>
+  <div class="about-grid">
+    <div class="reveal">
+      <p>I'm a student at <strong>Northeastern's D'Amore-McKim School of Business</strong>, studying Economics and Business Administration with a Finance concentration and a Data Science minor. The thesis behind that combination: the analysts who'll matter are the ones who can both build the model and build the tool that builds the model.</p>
+      <p>Right now most of my energy goes into a <strong>finance-AI project roadmap</strong>: tools that do real analyst work, built in Python and shipped publicly. I haven't locked in exactly where I want to end up yet, and this site is partly how I figure that out, by building things and seeing what sticks.</p>
+      <p>Off the desk: cricket, football (yes, I watch the Saudi Pro League, no, I won't apologize), music, fashion, and an unhealthy Clash Royale ladder rank.</p>
+    </div>
+    <div class="reveal">
+      <div class="fact"><span class="k">SCHOOL</span><span class="v">Northeastern · DMSB</span></div>
+      <div class="fact"><span class="k">STUDY</span><span class="v">Econ + Business Admin (Finance)</span></div>
+      <div class="fact"><span class="k">MINOR</span><span class="v">Data Science</span></div>
+      <div class="fact"><span class="k">FOCUS</span><span class="v">Public markets · Figuring it out</span></div>
+      <div class="fact"><span class="k">STACK</span><span class="v">Python · pandas · Streamlit · Excel</span></div>
+      <div class="fact"><span class="k">CO-OP</span><span class="v">Targeting Fall 2027</span></div>
+      <div class="fact"><span class="k">BASED</span><span class="v">Boston</span></div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="foot-inner">
+    <h2 class="reveal">Always happy to talk markets,<br><em>or anything else.</em></h2>
+    <div class="foot-links reveal">
+      <a href="mailto:bhandari.rish@northeastern.edu">Email ↗</a>
+      <a href="https://www.linkedin.com/in/rishibhandari22/" target="_blank">LinkedIn ↗</a>
+      <a href="https://github.com/iamrishibhandari" target="_blank">GitHub ↗</a>
+      <a href="resume.pdf" target="_blank">Résumé ↗</a>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Rishi Bhandari</span>
+      <span>BOSTON · 42.36°N 71.06°W</span>
+    </div>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="Back to top">↑</button>
+
+<script>
+// seamless ticker loop
+const t=document.getElementById('ticker');
+t.innerHTML+=t.innerHTML;
+
+// scroll reveal with stagger
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const el=e.target;
+      const siblings=[...el.parentElement.children].filter(c=>c.classList.contains(el.classList[0]));
+      const idx=siblings.indexOf(el);
+      el.style.transitionDelay=(Math.max(idx,0)*70)+'ms';
+      el.classList.add('in');
+      io.unobserve(el);
+    }
+  });
+},{threshold:.12});
+document.querySelectorAll('.reveal,.reveal-l,.reveal-s,.sec-head').forEach(el=>io.observe(el));
+
+// scroll progress + back-to-top
+const bar=document.getElementById('progress');
+const toTop=document.getElementById('toTop');
+const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;
+  bar.style.width=pct+'%';
+  toTop.classList.toggle('show',h.scrollTop>600);
+},{passive:true});
+toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:reduced?'auto':'smooth'}));
+
+// subtle hero parallax
+if(!reduced){
+  const h1=document.querySelector('h1');
+  window.addEventListener('scroll',()=>{
+    const y=window.scrollY;
+    if(y<700)h1.style.transform='translateY('+(y*0.12)+'px)';
+  },{passive:true});
+}
+</script>
+
+</body>
+</html>
