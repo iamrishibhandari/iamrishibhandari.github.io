@@ -155,6 +155,8 @@ section{padding:8vh 5vw;max-width:1100px;margin:0 auto}
   font-family:var(--mono);font-size:11px;letter-spacing:.06em;
   color:var(--up);text-transform:uppercase;
 }
+.log-item[hidden]{display:none}
+.log-toggle{margin-top:26px;background:none;color:var(--ink);cursor:pointer}
 
 /* ---------- projects ---------- */
 .proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:22px}
@@ -334,6 +336,22 @@ footer h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:va
     <span class="note">reverse chronological</span>
   </div>
   <div class="log-item reveal-l">
+    <div class="log-date">Jul 2026</div>
+    <div>
+      <span class="log-tag">E-Board</span>
+      <h3>Treasurer of the Data Club</h3>
+      <p>Applied, and got the email. Joining the e-board as Treasurer, with the role kicking off in the fall. Time to put the finance concentration to work on an actual budget.</p>
+    </div>
+  </div>
+  <div class="log-item reveal-l">
+    <div class="log-date">Jul 2026</div>
+    <div>
+      <span class="log-tag">Certified</span>
+      <h3>Registered Mutual Fund Distributor, India</h3>
+      <p>Cleared the NISM mutual fund distributors exam and am now a registered mutual fund distributor in India. The Nirmal Bang stint, now with a licence behind it.</p>
+    </div>
+  </div>
+  <div class="log-item reveal-l">
     <div class="log-date">Jun 2026</div>
     <div>
       <span class="log-tag">Shipped</span>
@@ -349,7 +367,7 @@ footer h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:va
       <p>Short stint in the sales department at Nirmal Bang, a stock brokerage in Bombay. Learnt a lot about how mutual funds actually get sold — the pitch, the pushback, and everything in between.</p>
     </div>
   </div>
-  <div class="log-item reveal-l">
+  <div class="log-item reveal-l" hidden>
     <div class="log-date">May 2026</div>
     <div>
       <span class="log-tag">Academics</span>
@@ -357,7 +375,7 @@ footer h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:va
       <p>Through Khoury College, placed into CS 2000. The logic: data science maps directly onto where finance is going (Python, stats, ML) without needing a CS background first.</p>
     </div>
   </div>
-  <div class="log-item reveal-l">
+  <div class="log-item reveal-l" hidden>
     <div class="log-date">Apr 2026</div>
     <div>
       <span class="log-tag">Pitch</span>
@@ -365,6 +383,7 @@ footer h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:va
       <p>Pitched OmniRetail at a campus venture pitch night with a full deck, memo, and speaker notes. Lost by one vote. Still mad about it.</p>
     </div>
   </div>
+  <button class="btn log-toggle" id="logToggle" type="button">See more ↓</button>
 </section>
 
 <section id="projects">
@@ -500,6 +519,19 @@ const io=new IntersectionObserver(entries=>{
   });
 },{threshold:.12});
 document.querySelectorAll('.reveal,.reveal-l,.reveal-s,.sec-head').forEach(el=>io.observe(el));
+
+// "see more" in updates log — reveals 4 hidden entries per click
+const logToggle=document.getElementById('logToggle');
+if(logToggle){
+  logToggle.addEventListener('click',()=>{
+    const hiddenItems=[...document.querySelectorAll('#log .log-item[hidden]')];
+    hiddenItems.slice(0,4).forEach((el,i)=>{
+      el.hidden=false;
+      setTimeout(()=>el.classList.add('in'),i*90);
+    });
+    if(hiddenItems.length<=4)logToggle.style.display='none';
+  });
+}
 
 // scroll progress + back-to-top
 const bar=document.getElementById('progress');
